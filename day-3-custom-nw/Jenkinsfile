@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('gitclone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/iamgnanesh108/terraform_endtoend.git'
+            }
+        }
+        stage('tfcmds') {
+            steps {
+                dir('day-3-custom-nw'){
+                sh '''
+                terraform init
+                terraform plan
+                '''
+                }
+            }
+        }
+    }
+}
